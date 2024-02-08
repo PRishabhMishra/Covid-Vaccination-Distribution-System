@@ -25,11 +25,29 @@ public class VaccinationCenterService {
 
     }
 
-    public void updateDocCountByOne(VaccinationCenter vaccinationCenter){
+    public void updateDocCountByOne(VaccinationCenter vaccinationCenter) {
         UUID id = vaccinationCenter.getId();
-        int docCount = vaccinationCenter.getDoctorCount() +1;
-        vaccinationCenterRepository.updateDocCountByOne(id,docCount);
+        int docCount = vaccinationCenter.getDoctorCount() + 1;
+        vaccinationCenterRepository.updateDocCountByOne(id, docCount);
+
+    }
+
+    public void updatePatientCountByOne(VaccinationCenter vaccinationCenter){
+        UUID id  = vaccinationCenter.getId();
+        int patientCount = vaccinationCenter.getPatientCount()+1;
+        vaccinationCenterRepository.updatePatientCountByOne(patientCount,id);
+    }
+    public List<VaccinationCenter>getMinimumVCOnTheBasisOfTypeAndPreference(String type,String  preference){
+        if(preference.equals("Sputnik")){
+            return vaccinationCenterRepository.getAllVCOntheBasisOfTypeAndSputnikCount(type);
+        }else if(preference.equals("Covishield")){
+            return vaccinationCenterRepository.getAllVCOntheBasisOfTypeAndCovishieldCount(type);
+        }else{
+            return vaccinationCenterRepository.getAllVCOntheBasisOfTypeAndCovaxinCount(type);
+        }
+
+        }
 
 
     }
-}
+

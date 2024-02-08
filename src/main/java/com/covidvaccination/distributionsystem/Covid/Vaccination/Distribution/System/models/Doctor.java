@@ -1,10 +1,10 @@
 package com.covidvaccination.distributionsystem.Covid.Vaccination.Distribution.System.models;
-
+import java.util.List;
+import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,11 +21,12 @@ public class Doctor {
     String docDegree;
 
     @ManyToOne
+    @JsonIgnore
     VaccinationCenter vaccinationCenter;
 
     int patientCount;
 
-    @OneToMany
+    @ManyToMany
     List<Patient>patients;
 
 
